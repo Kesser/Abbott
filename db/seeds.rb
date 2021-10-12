@@ -6,24 +6,24 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'ffaker'
+require 'faker'
 
 # Tenants
 10.times do
-  Tenant.create(name: FFaker::Company.name)
+  Tenant.create(name: Faker::Company.name)
 end
 
 # Users
 users = []
 20.times do
-  users << User.create(name: FFaker::Name.name)
+  users << User.create(name: Faker::Name.name)
 end
 
 # Questions and Answers
 20.times do
-  question = Question.create(title: FFaker::HipsterIpsum.sentence.gsub(/\.$/, "?"),
-    private: FFaker::Boolean.random, user: users.sample)
+  question = Question.create(title: Faker::Hipster.sentence.gsub(/\.$/, "?"),
+    private: Faker::Boolean.rand, user: users.sample)
   (1 + rand(3)).times do
-    question.answers.create(body: FFaker::HipsterIpsum.sentence, user: users.sample)
+    question.answers.create(body: Faker::Hipster.sentence, user: users.sample)
   end
 end
